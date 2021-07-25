@@ -8,22 +8,22 @@ import (
 
 type User struct {
 	Id    int    `validmor:"number,min=5,max=1000"`
-	Name  string `validmor:"string,min=2,max=100"`
-	Bio   string `validmor:"string"`
-	Email string `validmor:"mail"`
+	Name  string `validmor:"string,min=2,max=5"`
+	Bio   int    `validmor:"number,required"`
+	Email string `validmor:"mail,required"`
 }
 
 func main() {
+	validmor.Errors(validmor.ERR_EN)
 	user := User{
 		Id:    4,
-		Name:  "superlongstring",
-		Bio:   "",
-		Email: "foobar",
+		Name:  "sdsssssssa",
+		Bio:   0,
+		Email: "",
 	}
 
-	fmt.Println("Errors:")
-	for i, err := range validmor.ValidateStruct(user) {
-		fmt.Printf("\t%d. %s\n", i+1, err.Error())
+	for _, err := range validmor.ValidateStruct(user) {
+		fmt.Println(err)
 	}
 
 }

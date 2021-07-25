@@ -35,9 +35,17 @@ func getValidatorFromTag(tag string) Validator {
 		return &validator
 	}
 
+	for _, v := range args {
+		if v == "required" {
+			validator := required{}
+			return &validator
+		}
+	}
+
 	return &DefaultValidator{}
 }
 
+// validate the structure depending on the tags you have added to your structure
 func ValidateStruct(s interface{}) []error {
 	errs := []error{}
 
