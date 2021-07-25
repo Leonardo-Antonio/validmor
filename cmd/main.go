@@ -14,16 +14,16 @@ type User struct {
 }
 
 func main() {
-	validmor.Errors(validmor.ERR_EN)
+	validmor.Errors(validmor.ERR_ES)
 	user := User{
 		Id:    4,
-		Name:  "sdsssssssa",
+		Name:  "Leonardo",
 		Bio:   0,
-		Email: "",
+		Email: "novalid",
 	}
 
-	for _, err := range validmor.ValidateStruct(user) {
-		fmt.Println(err)
+	for i, err := range validmor.ValidateStruct(user) {
+		fmt.Printf("%v.- %v\n", i+1, err.Error())
 	}
 
 }

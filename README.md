@@ -63,15 +63,21 @@ func main() {
 	validmor.Errors(validmor.ERR_ES)
 	user := User{
 		Id:    4,
-		Name:  "sdsssssssa",
+		Name:  "Leonardo",
 		Bio:   0,
-		Email: "",
+		Email: "novalid",
 	}
 
 	for _, err := range validmor.ValidateStruct(user) {
-		fmt.Println(err)
+		fmt.Printf("%v.- %v\n", i+1, err.Error())
 	}
 
 }
 
+```
+### Errors Console
+```bash
+1.- Id debería tener como mínimo 5
+2.- Name debe tener menos de 5 caracteres de longitud
+3.- Email no es un email valido
 ```
