@@ -24,11 +24,15 @@ func getValidatorFromTag(tag string) Validator {
 	switch args[0] {
 	case "string":
 		validator := stringText{}
-		fmt.Sscanf(strings.Join(args[1:], ","), "min=%d,max=%d", &validator.Min, &validator.Max)
+		min, max := getMinMax(args[1:])
+		validator.Min = min
+		validator.Max = max
 		return &validator
 	case "number":
 		validator := number{}
-		fmt.Sscanf(strings.Join(args[1:], ","), "min=%d,max=%d", &validator.Min, &validator.Max)
+		min, max := getMinMax(args[1:])
+		validator.Min = min
+		validator.Max = max
 		return &validator
 	case "mail":
 		validator := mail{}
@@ -67,4 +71,20 @@ func ValidateStruct(s interface{}) []error {
 	}
 
 	return errs
+}
+
+func getMinMax(args []string) (min, max uint) {
+	switch len(args) {
+	case 2:
+		fmt.Sscanf(strings.Join(args, ","), "min=%d,max=%d", &min, &max)
+	case 1:
+		if strings.Contains(args[0], "min=") {
+			fmt.Sscanf(args[0], "min=%d", &min)
+		}
+		if strings.Contains(args[0], "max=") {
+			fmt.Sscanf(args[0], "max=%d", &max)
+		}
+	}
+
+	return
 }
