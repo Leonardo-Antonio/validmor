@@ -3,8 +3,9 @@ package validmor
 import "fmt"
 
 type stringText struct {
-	Min uint
-	Max uint
+	Min  uint
+	Max  uint
+	Enum string
 }
 
 func (s *stringText) Validate(val interface{}) (bool, error) {

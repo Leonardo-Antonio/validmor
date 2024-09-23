@@ -22,6 +22,10 @@ func getValidatorFromTag(tag string) Validator {
 	args := strings.Split(tag, ",")
 
 	switch args[0] {
+	case "enum":
+		validator := enum{}
+		validator.Values = getEnumValues(args[1])
+		return &validator
 	case "string":
 		validator := stringText{}
 		min, max := getMinMax(args[1:])
@@ -87,4 +91,13 @@ func getMinMax(args []string) (min, max uint) {
 	}
 
 	return
+}
+
+func getEnumValues(arg string) []string {
+	values := strings.Split(arg, "=")
+	if len(values) != 2 {
+		return []string{}
+	}
+
+	return strings.Split(values[1][1:len(values[1])-1], ";")
 }
