@@ -57,6 +57,7 @@ type User struct {
 	Name  string `validmor:"string,min=2,max=5"`
 	Bio   int    `validmor:"number,required"`
 	Email string `validmor:"mail,required"`
+	Agent string `validmor:"enum,values=[native;web;social]"`
 }
 
 func main() {
@@ -66,6 +67,7 @@ func main() {
 		Name:  "Leonardo",
 		Bio:   0,
 		Email: "novalid",
+    Agent: "web",
 	}
 
 	for _, err := range validmor.ValidateStruct(user) {
